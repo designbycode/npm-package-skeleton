@@ -50,6 +50,7 @@ rl.question('Enter package name: ', (packageName) => {
                             "devDependencies": {
                                 "@types/node": "^20.14.8",
                                 "prettier": "^3.3.2",
+                                "terser": "^5.31.1",
                                 "typescript": "^5.5.2",
                                 "vite": "^5.3.1",
                                 "vite-plugin-dts": "^3.9.1",
