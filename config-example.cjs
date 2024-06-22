@@ -61,11 +61,9 @@ rl.question('Enter package name: ', (packageName) => {
                         }
 
                         // Delete config.js file
-                        fs.unlinkSync('config.js');
+                        //fs.unlinkSync('config.js');
 
                         console.log('Package configured successfully!');
-                        console.log(`Thank you for using this template! Please star this project on GitHub n\ `);
-                        console.log(`Run the following command to install dependencies: ${packageManager} install `);
                         rl.close();
                     });
                 });

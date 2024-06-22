@@ -1,7 +1,7 @@
 {
-  "name": "Bubble Run",
-  "description": "test packages",
-  "author": "claudemyburgh <claude@designbycode.co.za>",
+  "name": "__PACKAGE_NAME__",
+  "description": "__PACKAGE_DESCRIPTION__",
+  "author": "__AUTHOR_NAME__ <__AUTHOR_EMAIL__>",
   "license": "MIT",
   "main": "src/index.js",
   "private": false,
