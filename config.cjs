@@ -17,7 +17,7 @@ rl.question('Enter package name: ', (packageName) => {
                 rl.question('Choose language (js/ts): ', (language) => {
                     rl.question('Choose package manager (npm/pnpm/yarn): ', (packageManager) => {
                         const packageJson = {
-                            name: packageName,
+                            name: packageName.replace(/\s+/g, '-').toLowerCase(),
                             version: '1.0.0',
                             description: description,
                             main: `src/index.${language === 'js' ? 'js' : 'ts'}`,
