@@ -45,18 +45,15 @@ rl.question('Enter package name: ', (packageName) => {
                                 "build": "tsc --declaration && vite build",
                                 "clean": "rd /s /q dist .cache>nul 2>&1|echo.>nul",
                                 "test": "vitest",
-                                "coverage": "vitest run --coverage",
                                 "pretty": "prettier --write \"src/**/*.ts\""
                             },
                             "devDependencies": {
-                                "@vitest/coverage-c8": "^0.33.0",
-                                "typescript": "^5.2.2",
-                                "vite": "^5.3.1",
                                 "@types/node": "^20.14.8",
-                                "@vitest/coverage-v8": "^1.6.0",
                                 "prettier": "^3.3.2",
+                                "typescript": "^5.5.2",
+                                "vite": "^5.3.1",
                                 "vite-plugin-dts": "^3.9.1",
-                                "vitest": "^1.6.0",
+                                "vitest": "^1.6.0"
                             }
                         };
 
