@@ -2,8 +2,7 @@ const fs = require('fs');
 const readline = require('readline');
 const path = require('path');
 
-const stubJsFolder = 'stub/js';
-const stubTsFolder = 'stub/ts';
+const stubFolder = 'stub';
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -36,29 +35,33 @@ rl.question('Enter package name: ', (packageName) => {
                         license = license.replace('__AUTHOR_NAME__', authorName);
                         fs.writeFileSync('LICENSE', license);
 
+                        // Copy vite.config file from stub folder
+                        const viteConfigStubFile = path.join(stubFolder, 'vite.config');
+                        const viteConfigFile = `vite.config${language === 'js' ? '.js' : '.ts'}`;
+                        fs.copyFileSync(viteConfigStubFile, viteConfigFile);
+
+                        // Replace __PACKAGE_NAME__ in vite.config file
+                        let viteConfigContent = fs.readFileSync(viteConfigFile, 'utf8');
+                        viteConfigContent = viteConfigContent.replace(/__PACKAGE_NAME__/g, packageName);
+                        fs.writeFileSync(viteConfigFile, viteConfigContent);
+
                         // Copy files from stub folder to src
                         const srcFolder = 'src';
                         fs.mkdirSync(srcFolder);
 
-                        let stubFolder;
-                        if (language === 'js') {
-                            stubFolder = stubJsFolder;
-                        } else {
-                            stubFolder = stubTsFolder;
-                        }
-
                         fs.readdirSync(stubFolder).forEach((file) => {
-                            fs.copyFileSync(path.join(stubFolder, file), path.join(srcFolder, file));
+                            if (file !== 'vite.config.stub') {
+                                fs.copyFileSync(path.join(stubFolder, file), path.join(srcFolder, file));
+                            }
                         });
 
-                        // Delete stub folders
-                        fs.rmSync(stubJsFolder, { recursive: true });
-                        fs.rmSync(stubTsFolder, { recursive: true });
+                        // Delete stub folder
+                        fs.rmSync(stubFolder, { recursive: true });
 
                         // Delete tsconfig.json if TypeScript was chosen
                         if (language === 'js') {
                             fs.unlinkSync('tsconfig.json');
-                            console.log('tsconfig.json delete \n')
+                            console.log('tsconfig.json deleted \n')
                         }
 
                         // Delete config.js file
