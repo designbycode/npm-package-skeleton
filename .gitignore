@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+stubs-test*
+config-example.cjs
+package-example.json
