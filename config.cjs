@@ -30,9 +30,10 @@ rl.question('Enter package name: ', (packageName) => {
 
                         fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2));
 
-                        const license = fs.readFileSync('LICENSE', 'utf8');
-                        license.replace('__YEAR__', new Date().getFullYear());
-                        license.replace('__AUTHOR_NAME__', authorName);
+
+                        let license = fs.readFileSync('LICENSE', 'utf8');
+                        license = license.replace('__YEAR__', new Date().getFullYear());
+                        license = license.replace('__AUTHOR_NAME__', authorName);
                         fs.writeFileSync('LICENSE', license);
 
                         // Copy files from stub folder to src
@@ -51,20 +52,20 @@ rl.question('Enter package name: ', (packageName) => {
                         });
 
                         // Delete stub folders
-                        fs.rmdirSync(stubJsFolder, { recursive: true });
-                        fs.rmdirSync(stubTsFolder, { recursive: true });
+                        fs.rmSync(stubJsFolder, { recursive: true });
+                        fs.rmSync(stubTsFolder, { recursive: true });
 
                         // Delete tsconfig.json if TypeScript was chosen
-                        if (language === 'typescript') {
-                            // fs.unlinkSync('tsconfig.json');
-                            console.log('tsconfig.json delete')
+                        if (language === 'js') {
+                            fs.unlinkSync('tsconfig.json');
+                            console.log('tsconfig.json delete \n')
                         }
 
                         // Delete config.js file
-                        fs.unlinkSync('config.js');
+                        fs.unlinkSync('config.cjs');
 
-                        console.log('Package configured successfully!');
-                        console.log(`Thank you for using this template! Please star this project on GitHub n\ `);
+                        console.log('Package configured successfully! \n');
+
                         console.log(`Run the following command to install dependencies: ${packageManager} install `);
                         rl.close();
                     });
