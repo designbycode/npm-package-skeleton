@@ -29,7 +29,8 @@ rl.question('Enter package name: ', (packageName) => {
                             "exports": {
                                 ".": {
                                     "import": "./dist/index.js",
-                                    "require": "./dist/index.umd.cjs"
+                                    "require": "./dist/index.umd.cjs",
+                                    "types": "./dist/index.d.ts"
                                 }
                             },
                             "files": [
